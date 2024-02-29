@@ -61,5 +61,28 @@ a:hover {
     position: absolute;
 }
 
+/* About Me */
 
+#about-me-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 50px;
+}
+
+#about-me-image-title {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+    width: 90%;
+}
+
+.dividing-line {
+    border-top: 1px solid white;
+    justify-self: center;
+    width: 70%;
+}
   
