@@ -5,21 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me</title>
     <link rel="icon" href="../views/plant-favicon.png">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/aboutMe.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
-        <a href="index.html">Home</a> <a href="aboutMe.html">About Me</a> <a href="myPlants.html">My Plants</a>
+        <div id="navigation-image">
+            <a href="index.html"><img src="../views/plant-favicon.png" width="40" height="40" title="Home"></a>
+        </div>
+        <div id="navigation-links">
+            <a href="aboutMe.html">About Me</a> <a href="myPlants.html">My Plants</a>
+        </div>
     </nav>
     <div id="about-me-body">
         <div id="about-me-image-title">
-            <img src="../views/pictureOfMe.jpg" width="400" height="525">
-            <h1>Hey! <br>My Name Is Peter</h1>
-        </div>
+            <img src="../views/pictureOfMe.jpg" width="400" height="525" style="border: 1px solid white">
+            <div id="about-me-main-title">
+                Hello! <br> I'm Peter
+            </div>
+        </div> <!-- END image and title -->
         <div class="dividing-line"></div>
-    </div>
+        <div class="centered">
+            <h1>Some things about me:</h1>
+            <p><ul>
+            <li>I'm a current Sophomore at the University of Minnesota - Twin Cities. I'm sure you can guess, but I am a computer science student, hoping to graduate with some sort of emphasis on web development.</li>
+            <li>Aside from being a full time CS student, I also TA an introductory computer science course here at the U</li>
+            <li>Outside of school, some of my hobbies include playing the piano and lifting weights</li>
+            <li>I only have a few plants, but it's enough to the point where I need to make a website solely for them</li>
+            <li>I used to work at a garden center over the summer, which I like to attribute my liking of plants to</li>
+            </ul></p>
+        </div>
+    </div> <!-- END aboutMe body-->
 </body>
 </html>

@@ -1,0 +1,45 @@
+/* Style sheet for my plant processor application */
+#main-index-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+#index-title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 55px;
+    width: 90%;
+    z-index: 1;
+    position: absolute;
+    text-shadow: 1px 1px 1px black;
+    padding-top: 50px;
+}
+
+#index-background {
+    background-image: url(../views/garden.JPG);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+    height: 100%;
+    width: 95%;
+    z-index: 0;
+    filter: blur(3px);
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.centered h1 {
+    font-size: 60px;
+}
+
+.centered h2 {
+    font-size: 40px;
+}
+
+.centered p {
+    font-size: 30px;
+}

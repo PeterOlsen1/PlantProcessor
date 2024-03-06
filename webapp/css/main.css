@@ -1,0 +1,72 @@
+/* Main style sheet for plant processor */
+
+body {
+    background: linear-gradient(320deg, rgb(19, 155, 53), rgba(17, 138, 45, 0.695));
+    color: white;
+    padding-bottom: 80%;
+    font-family: "Junge", cursive;
+    letter-spacing: 2px;
+}
+
+nav {
+    display: flex;
+    /* justify-content: space-evenly; */
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    background-color: rgba(255, 255, 255, 0.288);
+    font-size: 28pt;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+}
+
+#navigation-links {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+#navigation-image {
+    border: 1px solid white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#navigation-image:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+#navigation-image img {
+    position: relative;
+    top: 5px;
+}
+
+#navigation-links a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding-top: 5px;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.dividing-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, white, transparent);
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 15%;
+    margin-right: 15%;
+}

@@ -1,0 +1,50 @@
+
+#about-me-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 3%;
+    margin-right: 3%;
+    padding-top: 100px;
+}
+
+#about-me-image-title {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+    width: 90%;
+}
+
+#about-me-main-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 50pt;
+    width: 40%;
+    opacity: 0;
+    animation: appear 2s ease-in forwards; 
+}
+
+@keyframes appear {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.centered h1 {
+    font-size: 40px;
+}
+
+.centered p {
+    font-size: 20px;
+}
+
+ul {
+    margin-top: -30px;
+}
+
+li {
+    font-size: 20px;
+    margin-bottom: 10px;
+}

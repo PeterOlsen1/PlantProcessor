@@ -1,0 +1,41 @@
+#plant-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 70px;
+}
+
+#plant-body h1 {
+    font-size: 50px;
+    margin-bottom: -10px;
+}
+
+#p-header {
+    padding-bottom: 30px;
+}
+
+#plant-picture {
+    border: 1px solid white;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 400px;
+    width: 300px;
+}
+
+#caption {
+    font-size: 40px;
+    flex-wrap: wrap;
+    display:flex;
+    justify-content:center;
+    padding-top: 100px;
+    width: 400px;
+}
+#picture-and-caption {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 30px;
+    width: 80%;
+    height: 450px;
+}
