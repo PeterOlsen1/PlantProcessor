@@ -20,12 +20,27 @@ function start() {
         document.querySelector("#p-header").innerHTML = "All about " + plant.name;
 
         // Picture and caption area
-        document.querySelector("#plant-picture").setAttribute("src", "../views/tinyguy.jpeg");
+        document.querySelector("#plant-picture").setAttribute("src", plant.src);
         document.querySelector("#plant-picture").setAttribute("alt", "Picture of " + plant.name);
         document.querySelector("#caption").innerHTML = plant_image_captions[Math.floor(Math.random() * plant_image_captions.length)]
+
     } else {
         alert("There was a problem loading this webpage");
     }
+}
+
+function getDateDifference(str) {
+    //initialize both date objects
+    let currentDate = new Date();
+    let month = str.slice(0, 2);
+    let day = str.slice(2, 4);
+    let year = str.slice(4);
+    let otherDate = new Date(year, month-1, day);
+
+    //do the math to find the difference between the two
+    let msDifference = currentDate - otherDate;
+    let dayDifference = msDifference / 1000 / 60 / 60/ 24;
+    return dayDifference;
 }
 
 window.onload = start;
