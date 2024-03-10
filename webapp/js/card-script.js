@@ -1,5 +1,4 @@
 // This is for card page functionality, so that we can eventually add new cards and create new pages dynamically
-
 var cardlist = []
 
 /* 
@@ -19,30 +18,38 @@ More arguments will be added/acceptable soon
 var bird = {
     name: "Bird",
     species: "Bird of Paradise",
-    description: "Big!"
+    description: "Big!",
+    water: "02282024",
+    src: "../views/bird.jpeg"
 }
 
 var pearls = {
     name: "Her",
     species: "String of Pearls",
-    description: "Long with little balls"
+    description: "Long with little balls",
+    water: "02252024",
+    src:"../views/pearls.jpeg"
 }
 
-var philodendrin = {
+var pothos = {
     name: "New guy",
-    species: "Philodendrin?",
-    description: "Should be watered kinda often"
+    species: "Pothos",
+    description: "Should be watered kinda often",
+    water:"02262024",
+    src: "../views/pothos.jpeg"
 }
 
 var small_succulent = {
     name: "Tiny guy",
     species: "Succulent",
-    description: "My day 1"
+    description: "My day 1",
+    water:"03062024",
+    src: "../views/tinyguy.jpeg"
 }
 
 //populate the list manually for now
 cardlist.push(small_succulent);
-cardlist.push(philodendrin);
+cardlist.push(pothos);
 cardlist.push(pearls);
 cardlist.push(bird);
 
@@ -52,12 +59,18 @@ function card_maker(list) {
     for (let i = 0; i < list.length; i++){
         let tempString = "<div class=\"card\" onclick=\"redirectToPlantPage('" + encodeURIComponent(JSON.stringify(list[i])) + "')\"><div class=\"card-top\">";
         //put an image maybe in the card top
-
+        tempString += "<img src='" + list[i].src + "' width=120px height=170px>"
         //add a divider and set up for .card-bottom
         tempString += "</div><div class=\"card-divider\"></div><div class=\"card-bottom\">";
 
+        delete list[i].src;
         for (let property in list[i]){
-            tempString += "<b>" + property.charAt(0).toUpperCase() + property.slice(1) + "</b>: " + list[i][property] + "<br>";
+            if (property == 'water') {
+                tempString += "<b>Last Watered</b>: " + getDateDifference(list[i][property]).toFixed(1) + " days ago<br>";
+            }
+            else {
+                tempString += "<b>" + property.charAt(0).toUpperCase() + property.slice(1) + "</b>: " + list[i][property] + "<br>";
+            }
         }
 
         //close .card-bottom and .card divs
@@ -73,7 +86,22 @@ function redirectToPlantPage(plantData) {
     window.location.href = 'plantPage.html';
 }
 
-window.onload = () => {
-    let plant_cards = document.querySelector("#plant-cards");
-    plant_cards.innerHTML = card_maker(cardlist);
+
+//although this function is in individual-plant.js, i couldn't get the import statements to work
+function getDateDifference(str) {
+    //initialize both date objects
+    let currentDate = new Date();
+    let month = str.slice(0, 2);
+    let day = str.slice(2, 4);
+    let year = str.slice(4);
+    let otherDate = new Date(year, month-1, day);
+
+    //do the math to find the difference between the two
+    let msDifference = currentDate - otherDate;
+    let dayDifference = msDifference / 1000 / 60 / 60/ 24;
+    return dayDifference;
 }
+
+//execute everything
+let plant_cards = document.querySelector("#plant-cards");
+plant_cards.innerHTML = card_maker(cardlist);
