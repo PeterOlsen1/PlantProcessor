@@ -11,12 +11,19 @@
     margin-bottom: -10px;
 }
 
+#my-plants-body p {
+    font-size: 20px;
+    margin-top: 30px;
+    line-height: 40px;
+}
+
 #plant-cards {
     margin-left: 10%;
     margin-right: 10%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 .card {

@@ -11,6 +11,12 @@
     margin-bottom: -10px;
 }
 
+#plant-body p {
+    font-size: 30px;
+    margin-top: 30px;
+    line-height: 40px;
+}
+
 #p-header {
     padding-bottom: 30px;
 }
@@ -31,6 +37,7 @@
     padding-top: 100px;
     width: 400px;
 }
+
 #picture-and-caption {
     display: flex;
     justify-content: space-evenly;
@@ -39,3 +46,4 @@
     width: 80%;
     height: 450px;
 }
+
