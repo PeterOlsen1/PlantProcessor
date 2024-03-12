@@ -15,14 +15,30 @@ function start() {
         //get the uri that was sent
         let plant = JSON.parse(decodeURIComponent(plantData));
 
-        //chnage items in the document to match that of the plant
+        //change items in the document to match that of the plant
         document.querySelector("#p-title").innerHTML = plant.name + " Information";
         document.querySelector("#p-header").innerHTML = "All about " + plant.name;
 
-        // Picture and caption area
+        //Picture and caption area
         document.querySelector("#plant-picture").setAttribute("src", plant.src);
         document.querySelector("#plant-picture").setAttribute("alt", "Picture of " + plant.name);
         document.querySelector("#caption").innerHTML = plant_image_captions[Math.floor(Math.random() * plant_image_captions.length)]
+
+        //Plant watering section
+        let wateringInfo = document.querySelector("#watering");
+        let lastWatered = getDateDifference(plant.water);
+
+        //decide what color to make it, white for < 7 days, yellow for < 14, and red for 14 or over
+        if (lastWatered < 7) {
+            wateringInfo.innerHTML = "This plant has not been watered in " + lastWatered.toFixed(1) + " days. <br> It should be nice and hydrated.";
+        }
+        else if (lastWatered < 14) {
+            wateringInfo.innerHTML = "This plant has not been watered in <span style='color: yellow'>" + lastWatered.toFixed(1) + " days.</span> <br> Time to grab the watering can!";
+        }
+        else {
+            wateringInfo.innerHTML = "This plant has not been watered in <span style='color: red'>" + lastWatered.toFixed(1) + " days.</span> <br> You should really get on that.";
+        }
+
 
     } else {
         alert("There was a problem loading this webpage");
@@ -39,7 +55,7 @@ function getDateDifference(str) {
 
     //do the math to find the difference between the two
     let msDifference = currentDate - otherDate;
-    let dayDifference = msDifference / 1000 / 60 / 60/ 24;
+    let dayDifference = msDifference / 1000 / 60 / 60 / 24;
     return dayDifference;
 }
 

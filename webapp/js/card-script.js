@@ -57,16 +57,36 @@ cardlist.push(bird);
 function card_maker(list) {
     let outString = "";
     for (let i = 0; i < list.length; i++){
-        let tempString = "<div class=\"card\" onclick=\"redirectToPlantPage('" + encodeURIComponent(JSON.stringify(list[i])) + "')\"><div class=\"card-top\">";
+        let lastWatered = getDateDifference(list[i].water).toFixed(1);
+        let tempString;
+        if (lastWatered < 7) {
+            tempString = "<div class=\"card\" onclick=\"redirectToPlantPage('" + encodeURIComponent(JSON.stringify(list[i])) + "')\"><div class=\"card-top\">";
+        }
+        else if (lastWatered < 14 ) {
+            tempString = "<div class=\"card\" onclick=\"redirectToPlantPage('" + encodeURIComponent(JSON.stringify(list[i])) + "')\" style='border: 1px solid yellow'><div class=\"card-top\">";
+        }
+        else {
+            tempString = "<div class=\"card\" onclick=\"redirectToPlantPage('" + encodeURIComponent(JSON.stringify(list[i])) + "')\" style='border: 1px solid red'><div class=\"card-top\">";
+        }
         //put an image maybe in the card top
         tempString += "<img src='" + list[i].src + "' width=120px height=170px>"
         //add a divider and set up for .card-bottom
         tempString += "</div><div class=\"card-divider\"></div><div class=\"card-bottom\">";
 
+        //get rid of this so that our loop doesn't go over it
         delete list[i].src;
+
         for (let property in list[i]){
             if (property == 'water') {
-                tempString += "<b>Last Watered</b>: " + getDateDifference(list[i][property]).toFixed(1) + " days ago<br>";
+                if (lastWatered < 7) {
+                    tempString += "<b>Last Watered</b>: " + lastWatered + " days ago<br>";
+                }
+                else if (lastWatered < 14) {
+                    tempString += "<b>Last Watered</b>: <span style='color: yellow'>" + lastWatered + " days ago</span><br>";
+                }
+                else {
+                    tempString += "<b>Last Watered</b>: <span style='color: red'>" + lastWatered + " days ago</span><br>";
+                }
             }
             else {
                 tempString += "<b>" + property.charAt(0).toUpperCase() + property.slice(1) + "</b>: " + list[i][property] + "<br>";
