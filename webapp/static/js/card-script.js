@@ -27,7 +27,7 @@ var pearls = {
     name: "Her",
     species: "String of Pearls",
     description: "Long with little balls",
-    water: "02252024",
+    water: "03112024",
     src:"../views/pearls.jpeg"
 }
 
@@ -35,7 +35,7 @@ var pothos = {
     name: "New guy",
     species: "Pothos",
     description: "Should be watered kinda often",
-    water:"02262024",
+    water:"03112024",
     src: "../views/pothos.jpeg"
 }
 

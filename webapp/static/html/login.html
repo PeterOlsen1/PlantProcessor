@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="decription" content="A simple website made to track my plants">
+    <title>Login</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../views/plant-favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <!-- JS -->
+    <script defer src="../js/populate-nav.js"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    </nav>
+    <div class="centered">
+        <h1>Welcome!</h1>
+        <h3>To track data about your own plants, you must first login.</h3><br><br>
+        <div class="dividing-line"></div>
+        <div class="login-table">
+            <div class="login-box">
+                <label>Username</label>
+                <input type="text" class="login-inputs" id="username" pattern="^[a-zA-Z0-9]+$" required>
+            </div>
+            <div class="login-box">
+                <label style="padding-right: 24px">Password</label>
+                <input type="text" class="login-inputs" id="password" pattern="^[a-zA-Z0-9]+$" required>
+            </div>
+            <div class="login-box">
+                <button>Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
