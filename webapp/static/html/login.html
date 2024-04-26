@@ -22,7 +22,9 @@
     </nav>
     <div class="centered">
         <h1>Welcome!</h1>
-        <h3>To track data about your own plants, you must first login.</h3><br><br>
+        <h3>To track data about your own plants, you must first login.</h3><br>
+        <p>Don't have an account? Click <a href="/static/html/newUser.html" style="text-decoration: underline;">here</a> to make one!</p>
+        <p>Username and password ARE case sensitive</p>
         <div class="dividing-line"></div>
         <div class="login-table">
             <div class="login-box">
@@ -30,13 +32,31 @@
                 <input type="text" class="login-inputs" id="username" pattern="^[a-zA-Z0-9]+$" required>
             </div>
             <div class="login-box">
-                <label style="padding-right: 24px">Password</label>
-                <input type="text" class="login-inputs" id="password" pattern="^[a-zA-Z0-9]+$" required>
+                <label style="padding-right: 28px">Password</label>
+                <input type="password" class="login-inputs" id="password" pattern="^[a-zA-Z0-9]+$" required>
             </div>
             <div class="login-box">
-                <button>Login</button>
+                <button onclick="login()">Login</button>
             </div>
         </div>
     </div>
 </body>
+<script>
+    async function login() {
+        let username = document.querySelector('#username').value;
+        let password = document.querySelector('#password').value;
+
+        let params = {
+                    password: document.querySelector('#password').value,
+                    username: document.querySelector('#username').value
+                };
+        let result = await fetch('http://localhost:5000/validate-login', {
+            method: "POST",
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(params)
+        });
+        let data = await result.json();
+        console.log(data);
+    }
+</script>
 </html>
