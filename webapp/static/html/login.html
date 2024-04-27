@@ -26,6 +26,7 @@
         <p>Don't have an account? Click <a href="/static/html/newUser.html" style="text-decoration: underline;">here</a> to make one!</p>
         <p>Username and password ARE case sensitive</p>
         <div class="dividing-line"></div>
+        <div class="login-alert" style="display: none"></div>
         <div class="login-table">
             <div class="login-box">
                 <label>Username</label>
@@ -36,7 +37,7 @@
                 <input type="password" class="login-inputs" id="password" pattern="^[a-zA-Z0-9]+$" required>
             </div>
             <div class="login-box">
-                <button onclick="login()">Login</button>
+                <button onclick="login()" id="submit">Login</button>
             </div>
         </div>
     </div>
@@ -56,7 +57,23 @@
             body: JSON.stringify(params)
         });
         let data = await result.json();
-        console.log(data);
+
+        if (data.status == 'success') {
+            window.location.href = 'myPlants.html';
+        }
+        else {
+            document.querySelector('#username').value = "";
+            document.querySelector('#password').value = "";
+            document.querySelector('.login-alert').innerHTML = "Incorrect username/password";
+            document.querySelector('.login-alert').setAttribute('style', 'display: inline-block');
+        }
     }
+
+    document.querySelector('body').addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+            login();
+        }
+    });
+
 </script>
 </html>
