@@ -1,4 +1,4 @@
-from flask import Flask, send_file, send_from_directory, request, session, jsonify
+from flask import Flask, send_file, send_from_directory, request, session, jsonify, render_template
 import os
 import psycopg2
 from psycopg2 import pool
@@ -35,6 +35,19 @@ APP ROUTES ---------------------------------------------------------------------
 def welcome():
     return send_file(CWD + '/static/html/index.html')
 
+@app.route('/test')
+def test():
+    return render_template('myPlants.html', session=session)
+
+@app.route('/addPlant', methods=["POST"])
+def post_addPlant():
+    data = request.form
+    picture = request.files['picture']
+    path = 'uploads'
+    picture.save('/uploads')
+    # query("INSERT INTO users (user_id, name, species, description, watered, picture) VALUES (%s, %s, %s, %s, %s, %s)", (session['id'], data.name, data.species, data.description, data.watered, filepath))
+    return jsonify({'dope':'dope'})#render_template('myPlants.html', session=session)
+
 @app.route('/static/<path:filename>')
 def serve_static(filename):
     return send_from_directory(app.static_folder, filename)
@@ -45,31 +58,43 @@ def serve_static(filename):
 APP APIs -------------------------------------------------------------------------------------------------------------------------------------
 
 '''
-#bcrypt.checkpw(password.encode('utf-8'), res.encode('utf-8'))
 
 @app.route('/validate-login', methods=['POST'])
 def validate_login():
+    '''
+    Select all of the given name from the databse. If password matches, return success
+    '''
     body = request.json
     password = body['password']
     username = body['username']
     names = query("SELECT * FROM users WHERE username = %s", (username,))
     for name in names:
         if (bcrypt.checkpw(password.encode('utf-8'), name[2].encode('utf-8'))):
+            session['username'] = name[1]
+            session['id'] = name[0]
             return jsonify({'status':'success'})
     return jsonify({'status':'failure'})
 
 
 @app.route('/addUser', methods=['POST'])
 def add_user():
+    '''
+    This function will add a new user to the databse
+    '''
     body =  request.json
     password = body['password']
     username = body['username']
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     query("INSERT INTO users (username, password) VALUES (%s, %s)", (username, hashed_password.decode('utf-8')))
+    session['username'] = username
+    session['id'] = (query("SELECT * FROM users WHERE username = %s", (username,)))[0]
     return jsonify({'status':'success'})
 
 @app.route('/userOverlap')
 def user_overlap():
+    '''
+    Function to check if the given username exists in the database
+    '''
     name = request.args.get('username')
     result = query("SELECT * FROM users WHERE username = %s", (name,))
     return jsonify(result)
