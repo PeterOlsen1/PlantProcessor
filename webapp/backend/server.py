@@ -1,16 +1,23 @@
 from flask import Flask, send_file, send_from_directory, request, session, jsonify, render_template
 import os
 import psycopg2
-from psycopg2 import pool
 import bcrypt
 import json
+import sys
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+from backend.site.routes import site
+
 
 '''
 GLOBALS -------------------------------------------------------------------------------------------------------------------------------------
 
 '''
-CWD = os.getcwd()
-app = Flask(__name__, '/' + CWD + '/static')
+FRONTEND = os.getcwd() + "/.."
+app = Flask(__name__, 
+            static_folder='/' + FRONTEND + '/static', 
+            template_folder='/' + FRONTEND + '/templates')
+app.register_blueprint(site)
 app.secret_key = 'bob'
 
 def query(query, params=None):
@@ -33,11 +40,15 @@ APP ROUTES ---------------------------------------------------------------------
 '''
 @app.route('/')
 def welcome():
-    return send_file(CWD + '/static/html/index.html')
+    return send_file(FRONTEND + '/static/html/index.html')
 
 @app.route('/test')
 def test():
-    return render_template('myPlants.html', session=session)
+    if session:
+        return render_template('myPlants.html', session=session, login=True)
+    else:
+        return send_file(FRONTEND + '/staitc/html/requreLogin.html')
+
 
 @app.route('/addPlant', methods=["POST"])
 def post_addPlant():
