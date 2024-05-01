@@ -2,11 +2,11 @@ from flask import Flask, send_file, send_from_directory, request, session, jsoni
 import os
 import psycopg2
 import bcrypt
-import json
 import sys
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 from backend.site.routes import site
+from backend.api.routes import api
 
 
 '''
@@ -26,7 +26,7 @@ def query(query, params=None):
     Makes queries a few lines shorter by automating the connection/cursor part of PostgreSQL
     If the query was a select, return all data that came from it, otherwise do nothing
     '''
-    connection = psycopg2.connect(database="plants", user="postgres", password="12345", host="localhost", port="5432") 
+    connection = psycopg2.connect(database="plants", user="postgres", password="12345", host="100.110.23.151", port="5432") 
     cursor = connection.cursor()
     cursor.execute(query, params)
     connection.commit()
@@ -38,9 +38,6 @@ def query(query, params=None):
 APP ROUTES -------------------------------------------------------------------------------------------------------------------------------------
 
 '''
-@app.route('/')
-def welcome():
-    return send_file(FRONTEND + '/static/html/index.html')
 
 @app.route('/test')
 def test():
@@ -59,9 +56,6 @@ def post_addPlant():
     # query("INSERT INTO users (user_id, name, species, description, watered, picture) VALUES (%s, %s, %s, %s, %s, %s)", (session['id'], data.name, data.species, data.description, data.watered, filepath))
     return jsonify({'dope':'dope'})#render_template('myPlants.html', session=session)
 
-@app.route('/static/<path:filename>')
-def serve_static(filename):
-    return send_from_directory(app.static_folder, filename)
 
 
 
