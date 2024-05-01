@@ -51,3 +51,23 @@ def serve_html(filename):
 @site.route('/views/<path:filename>')
 def serve_views(filename):
     return send_from_directory(WEBAPP + '/static/views', filename)
+
+'''
+STATIC FILES WITH STATIC IN PATHNAME
+'''
+
+@site.route('/static/css/<path:filename>')
+def serve_css_static(filename):
+    return send_from_directory(WEBAPP + '/static/css', filename)
+
+@site.route('/static/js/<path:filename>')
+def serve_js_static(filename):
+    return send_from_directory(WEBAPP + '/static/js', filename)
+
+@site.route('/static/html/<path:filename>')
+def serve_html_static(filename):
+    return send_from_directory(WEBAPP + '/static/html', filename)
+
+@site.route('/static/views/<path:filename>')
+def serve_views_static(filename):
+    return send_from_directory(WEBAPP + '/static/views', filename)
