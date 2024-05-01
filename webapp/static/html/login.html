@@ -22,7 +22,7 @@
     </nav>
     <div class="centered">
         <h1>Welcome!</h1>
-        <h3>To track data about your own plants, you must first login.</h3><br>
+        <h3 class="centered">To track data about your own plants, you must first login.</h3><br>
         <p>Don't have an account? Click <a href="/static/html/newUser.html" style="text-decoration: underline;">here</a> to make one!</p>
         <p>Username and password ARE case sensitive</p>
         <div class="dividing-line"></div>
@@ -51,7 +51,7 @@
                     password: document.querySelector('#password').value,
                     username: document.querySelector('#username').value
                 };
-        let result = await fetch('http://localhost:5000/validate-login', {
+        let result = await fetch('/api/login', {
             method: "POST",
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(params)
@@ -59,7 +59,7 @@
         let data = await result.json();
 
         if (data.status == 'success') {
-            window.location.href = 'myPlants.html';
+            window.location.href = '/static/html/myPlants.html';
         }
         else {
             document.querySelector('#username').value = "";

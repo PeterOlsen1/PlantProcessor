@@ -58,9 +58,10 @@
         }
 
         else {
-            let result = await fetch('http://localhost:5000/userOverlap?username=' + document.querySelector('#username').value);
+            let result = await fetch('/api/userOverlap?username=' + document.querySelector('#username').value);
             let data = await result.json();
-            if (data.length != 0) {
+
+            if (data.status == 'taken') {
                 document.querySelector(".login-alert").innerHTML = "Username already taken";
                 document.querySelector(".login-alert").setAttribute('style', 'display:inline-block');
             }
@@ -69,7 +70,7 @@
                     password: document.querySelector('#password').value,
                     username: document.querySelector('#username').value
                 };
-                let result = await fetch('http://localhost:5000/addUser', {
+                let result = await fetch('/api/addUser', {
                     method: "POST",
                     headers: {'Content-Type':'application/json'},
                     body: JSON.stringify(params)
@@ -79,5 +80,11 @@
             }
         }
     }
+
+    document.querySelector('body').addEventListener('keypress', function(event) {
+        if (event.keyCode === 13) {
+            userSubmit();
+        }
+    });
 </script>
 </html>
