@@ -20,7 +20,7 @@
 }
 
 #index-background {
-    background-image: url(../views/garden.JPG);
+    background-image: url(../views/garden.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(5px);
