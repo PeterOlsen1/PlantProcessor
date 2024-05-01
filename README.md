@@ -5,5 +5,5 @@ Obviously it's not the greatest and most secure, but it is a start.
 The web stack I used was:
   -basic frontend, (HTML, CSS)
   -Flask server
-  -PostgreSQL database
+  -MongoDB database
 ```
