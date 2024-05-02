@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Plants</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../static/views/plant-favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/myPlants.css">
+    <!-- JS -->
+    <script defer src="../static/js/populate-nav.js"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    </nav>
+    <div id="my-plants-body">
+        <h1>Hello {{session['name']}}, welcome to your plant interface</h1>
+        <p style="text-align: center">The hub for all things plant.<br>
+            {# Click <a href='/templates/editPlantMenu' style="text-decoration: underline">here</a> to edit a plant #}</p>
+        <br>
+        <div id="plant-cards">
+            {%for plant in plants%}
+                {%if dateDifference(plant['lastWatered']) < 7%}
+                    <div class="card" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                        <div class="card-top">
+                            <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
+                        </div>
+                        <div class="card-divider"></div>
+                        <div class="card-bottom">
+                            <b>Name:</b> {{plant['name']}} <br>
+                            <b>Species:</b> {{plant['species']}}<br>
+                            <b>Description:</b> {{plant['description']}}<br>
+                            <b>Last Watered:</b> {{dateDifference(plant['lastWatered'])}} days ago<br>
+                        </div>   
+                    </div>
+                {%elif dateDifference(plant['lastWatered']) >= 7%}
+                    <div class="card" href="/templates/plant?" style="border: 1px solid yellow" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                        <div class="card-top">
+                            <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
+                        </div>
+                        <div class="card-divider"></div>
+                        <div class="card-bottom">
+                            <b>Name:</b> {{plant['name']}} <br>
+                            <b>Species:</b> {{plant['species']}}<br>
+                            <b>Description:</b> {{plant['description']}}<br>
+                            <b>Last Watered:</b> {{dateDifference(plant['lastWatered'])}} days ago<br>
+                        </div>   
+                    </div>
+                {%elif dateDifference(plant['lastWatered']) >= 14%}
+                    <div class="card" href="/templates/plant?" style="border: 1px solid red" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                        <div class="card-top">
+                            <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
+                        </div>
+                        <div class="card-divider"></div>
+                        <div class="card-bottom">
+                            <b>Name:</b> {{plant['name']}} <br>
+                            <b>Species:</b> {{plant['species']}}<br>
+                            <b>Description:</b> {{plant['description']}}<br>
+                            <b>Last Watered:</b> {{dateDifference(plant['lastWatered'])}} days ago<br>
+                        </div>   
+                    </div>
+                {%endif%}
+            {%endfor%}
+        </div>
+        <div class="dividing-line"></div>
+        <h1>What do the colors mean?</h1>
+        <p>No color change means that this plant has been watered within the last week.
+        <br><span style="color:yellow">Yellow</span> means that this plant was last watered between 1-2 weeks ago
+        <br><span style="color:red">Red</span> means that this plant has not been watered in more than 2 weeks. It probably needs it.
+        </p>
+    </div>
+</body>
+<script>
+    function redirect(fname) {
+        window.location.href='/templates/plant?fname=' + fname;
+    }
+</script>
+</html>

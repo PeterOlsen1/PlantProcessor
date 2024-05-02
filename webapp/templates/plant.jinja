@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{plant['name']}} Information</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../views/plant-favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/plantPage.css">
+    <!-- JS -->
+    {# <script src="../js/individual-plant.js"></script> #}
+    <script defer src="../js/populate-nav.js"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    </nav>
+    <div id="plant-body">
+        <h1 id="p-header"></h1>
+        <div class="dividing-line"></div>
+        <div id="picture-and-caption">
+            <img id="plant-picture" src="../backend/uploads/{{plant['fname']}}">
+            <p id="caption"></p>
+        </div>
+        <div class="dividing-line"></div>
+        <!-- Watering section -->
+        <div class="centered">
+            <h1>Watering information:</h1>
+            <p id="watering"></p> <br><br>
+            <p><span id="insert-plant-species"></span> watering information</p>
+        </div>
+    </div>
+</body>
+</html>
