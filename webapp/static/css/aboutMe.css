@@ -17,6 +17,7 @@
 }
 
 #about-me-main-title {
+    padding-top: 7%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +33,12 @@
     100% {opacity: 1;}
 }
 
+#about-me-main-title {
+    overflow: hidden;
+    display: inline-block;
+}
+
+  
 .centered h1 {
     font-size: 40px;
 }
@@ -41,7 +48,7 @@
 }
 
 ul {
-    margin-top: -30px;
+    line-height: 180%
 }
 
 li {
