@@ -1,4 +1,4 @@
-from flask import Blueprint, send_file, send_from_directory
+from flask import Blueprint, send_file, send_from_directory, session, redirect
 import os
 
 WEBAPP = os.getcwd() + "/.."
@@ -23,7 +23,9 @@ def serve_aboutMe():
 
 @site.route('/addPlant')
 def serve_addPlant():
-    return send_file(WEBAPP + "/static/html/addPlant.html")
+    if session:
+        return send_file(WEBAPP + "/static/html/addPlant.html")
+    return redirect("/login?destination=addPlant")
 
 @site.route('/newUser')
 def serve_newUser():
@@ -71,3 +73,14 @@ def serve_html_static(filename):
 @site.route('/static/views/<path:filename>')
 def serve_views_static(filename):
     return send_from_directory(WEBAPP + '/static/views', filename)
+
+'''
+UPLOADED FILES
+'''
+@site.route('/uploads/<path:filename>')
+def serve_uploads(filename):
+    return send_from_directory(WEBAPP + '/backend/uploads', filename)
+
+@site.route('/backend/uploads/<path:filename>')
+def serve_uploads_backend(filename):
+    return send_from_directory(WEBAPP + '/backend/uploads', filename)
