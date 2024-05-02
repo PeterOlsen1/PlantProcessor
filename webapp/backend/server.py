@@ -7,6 +7,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 from backend.site.routes import site
 from backend.api.routes import api
+from backend.template.routes import template
 from db_connect import db
 
 '''
@@ -23,6 +24,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 app.register_blueprint(site)
 app.register_blueprint(api)
+app.register_blueprint(template)
 
 app.secret_key = 'bob'
 
@@ -41,5 +43,3 @@ def test():
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
-    #postgresql password = 12345
-    #port : 5432
