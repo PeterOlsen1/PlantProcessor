@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/plantPage.css">
     <!-- JS -->
-    {# <script src="../js/individual-plant.js"></script> #}
+    <script defer src="../js/individual-plant.js"></script>
     <script defer src="../js/populate-nav.js"></script>
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,18 +21,36 @@
     <nav>
     </nav>
     <div id="plant-body">
-        <h1 id="p-header"></h1>
-        <div class="dividing-line"></div>
+        <h1 id="p-header">All about {{plant['name']}}!</h1>
         <div id="picture-and-caption">
             <img id="plant-picture" src="../backend/uploads/{{plant['fname']}}">
             <p id="caption"></p>
         </div>
-        <div class="dividing-line"></div>
-        <!-- Watering section -->
         <div class="centered">
-            <h1>Watering information:</h1>
-            <p id="watering"></p> <br><br>
-            <p><span id="insert-plant-species"></span> watering information</p>
+            {%if dateDifference(plant['lastWatered']) == 1%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px;">{{dateDifference(plant['lastWatered'])}}</span> day. Way to stay on top of your watering!</p>
+            {%elif dateDifference(plant['lastWatered']) < 7%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px;">{{dateDifference(plant['lastWatered'])}}</span> days. Way to stay on top of your watering!</p>
+            {%elif dateDifference(plant['lastWatered']) >= 7%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid yellow; padding: 2px; color: yellow">{{dateDifference(plant['lastWatered'])}}</span> days. Time to grab the watering can!</p>
+            {%elif dateDifference(plant['lastWatered']) >= 14%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red">{{dateDifference(plant['lastWatered'])}}</span> days. You should probably get on that.</p>
+            {%endif%}
+            <button href="/api/newWatering?fname={{plant['fname']}}">Click to register a watering today</button>
+            <p>Click <a style="text-decoration: underline" href="/templates/editPlant?id={{plant['_id']}}">here</a> to edit {{plant['name']}}'s information</p> <br><br>
+        </div>
+        <div class="dividing-line"></div>
+        <div class="centered">
+            <h1>Extra information</h1>
+            {% if plant['species'][0] in 'aeiouAEIOU'%}
+                <p><a href='https://www.google.com/search?q=How+often+should+I+water+an+{{plant["species"]}}+plant' style="text-decoration: underline" target="blank">How often should I water an {{plant['species']}}?</a></p>
+                <p><a href='https://www.google.com/search?q=How+do+I+care+for+an+{{plant["species"]}}+plant' style="text-decoration: underline" target="blank">How to care for an {{plant['species']}}</a></p>
+                            <p><a href='https://www.google.com/search?q=How+much+sun+does+an+{{plant["species"]}}+need' style="text-decoration: underline" target="blank">How much sunlight does an {{plant['species']}} need</a></p>
+            {% else %}
+                <p><a href='https://www.google.com/search?q=How+often+should+I+water+a+{{plant["species"]}}+plant' style="text-decoration: underline" target="blank">How often should I water a {{plant['species']}}?</a></p>
+                <p><a href='https://www.google.com/search?q=How+do+I+care+for+a+{{plant["species"]}}+plant' style="text-decoration: underline" target="blank">How to care for a {{plant['species']}}</a></p>
+                <p><a href='https://www.google.com/search?q=How+much+sun+does+a+{{plant["species"]}}+need' style="text-decoration: underline" target="blank">How much sunlight does a {{plant['species']}} need</a></p>
+            {% endif %}
         </div>
     </div>
 </body>
