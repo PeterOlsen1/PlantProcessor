@@ -67,3 +67,19 @@ b {
     padding-bottom: -2px;
     border-bottom: 2px solid white;
 }
+
+#not-plants {
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+
+.card-bottom::-webkit-scrollbar {
+    background-color: rgba(255, 255, 255, 0);
+    width: 8px;
+}
+
+.card-bottom::-webkit-scrollbar-thumb {
+    background-color: #fffefe8e;
+    border-radius: 5px;
+}
