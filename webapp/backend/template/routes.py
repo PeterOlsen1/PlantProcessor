@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, session, redirect, request
 import os
 from backend.db_connect import db
 from datetime import datetime
+from bson.objectid import ObjectId
 
 WEBAPP = os.getcwd() + "/.."
 template = Blueprint('template', __name__, url_prefix='/templates')\
@@ -22,6 +23,9 @@ def dateDifference(date_str):
 
 @template.route('/myPlants')
 def templates_myPlants():
+    '''
+    Get the list of plants for the user and render them on the template
+    '''
     if session:
         plants = list(db['plants'].find({"owner":session['username']}))
         return render_template('myPlants.jinja', 
@@ -33,10 +37,12 @@ def templates_myPlants():
 
 @template.route('/plant')
 def templates_plant():
+    '''
+    Fname is passed into this as a request since that is the only key in the database which will be different for every plant
+    '''
     if session:
-        fname = request.args.get('fname')
-        print(fname)
-        plant = list(db['plants'].find_one({"fname":fname}))
+        id = request.args.get('id')
+        plant = db['plants'].find_one({"_id": ObjectId(id)})
         return render_template('plant.jinja', 
                                session=session, 
                                plant=plant, 
@@ -48,9 +54,10 @@ def templates_plant():
 @template.route('/editPlant')
 def templates_editPlant():
     if session:
-        plants = list(db['plants'].find({"owner":session['username']}))
+        id = request.args.get('id')
+        plant = db['plants'].find_one({"_id": ObjectId(id)})
         return render_template('editPlant.jinja', 
                                session=session, 
-                               plants=plants)
+                               plant=plant)
     else:
         return redirect('/login')
