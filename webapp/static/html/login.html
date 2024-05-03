@@ -51,6 +51,8 @@
                     password: document.querySelector('#password').value,
                     username: document.querySelector('#username').value
                 };
+
+        //fetch from the backend
         let result = await fetch('/api/login', {
             method: "POST",
             headers: {'Content-Type':'application/json'},
@@ -58,9 +60,20 @@
         });
         let data = await result.json();
 
+        const url = new URL(window.location);
+        const searchParams = new URLSearchParams(url.search);
+
         if (data.status == 'success') {
-            window.location.href = '/static/html/myPlants.html';
+            //if the user was redirected from the addPlant page
+            if (searchParams.size > 0) {
+                window.location.href = '/addPlant';
+            }
+            //default login page
+            else {
+                window.location.href = '/templates/myPlants';
+            }
         }
+        //clear name / password, try again
         else {
             document.querySelector('#username').value = "";
             document.querySelector('#password').value = "";
@@ -69,6 +82,7 @@
         }
     }
 
+    //event listener to let the user hit enter to submit the form
     document.querySelector('body').addEventListener('keypress', function(event) {
         if (event.keyCode === 13) {
             login();
