@@ -21,13 +21,18 @@
     </nav>
     <div id="my-plants-body">
         <h1>Hello {{session['name']}}, welcome to your plant interface</h1>
-        <p style="text-align: center">The hub for all things plant.<br>
-            {# Click <a href='/templates/editPlantMenu' style="text-decoration: underline">here</a> to edit a plant #}</p>
+        <p style="text-align: center">The hub for all things plant.<br></p>
         <br>
         <div id="plant-cards">
+            {% if not plants %}
+                <div class="centered" id="not-plants">
+                    <h1>Uh oh, looks like you have no plants yet! <br><br>
+                    Click <a href='/addPlant' style="text-decoration: underline">here</a> to add some!</h1>
+                </div>
+            {% endif %}
             {%for plant in plants%}
                 {%if dateDifference(plant['lastWatered']) < 7%}
-                    <div class="card" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                    <div class="card" onclick="window.location.href = '/templates/plant?id={{plant['_id']}}'">
                         <div class="card-top">
                             <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
                         </div>
@@ -40,7 +45,7 @@
                         </div>   
                     </div>
                 {%elif dateDifference(plant['lastWatered']) >= 7%}
-                    <div class="card" href="/templates/plant?" style="border: 1px solid yellow" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                    <div class="card" style="border: 1px solid yellow" onclick="window.location.href = '/templates/plant?id={{plant['_id']}}'">
                         <div class="card-top">
                             <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
                         </div>
@@ -53,7 +58,7 @@
                         </div>   
                     </div>
                 {%elif dateDifference(plant['lastWatered']) >= 14%}
-                    <div class="card" href="/templates/plant?" style="border: 1px solid red" onclick="window.location.href = '/templates/plant?fname={{plant['fname']}}'">
+                    <div class="card" style="border: 1px solid red" onclick="window.location.href = '/templates/plant?id={{plant['_id']}}'">
                         <div class="card-top">
                             <img src='/uploads/{{plant["fname"]}}' width="120px" height="170px">
                         </div>
@@ -68,12 +73,14 @@
                 {%endif%}
             {%endfor%}
         </div>
-        <div class="dividing-line"></div>
-        <h1>What do the colors mean?</h1>
-        <p>No color change means that this plant has been watered within the last week.
-        <br><span style="color:yellow">Yellow</span> means that this plant was last watered between 1-2 weeks ago
-        <br><span style="color:red">Red</span> means that this plant has not been watered in more than 2 weeks. It probably needs it.
-        </p>
+        {% if plants %}
+            <div class="dividing-line"></div>
+            <h1>What do the colors mean?</h1>
+            <p>No color change means that this plant has been watered within the last week.
+            <br><span style="color:yellow">Yellow</span> means that this plant was last watered between 1-2 weeks ago
+            <br><span style="color:red">Red</span> means that this plant has not been watered in more than 2 weeks. It probably needs it.
+            </p>
+        {% endif %}
     </div>
 </body>
 <script>
