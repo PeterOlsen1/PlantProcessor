@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="decription" content="A simple website made to track my plants">
-    <title>Login</title>
+    <title>Add a Plant</title>
     <!-- FAVICON -->
     <link rel="icon" href="../views/plant-favicon.png">
     <!-- CSS -->
@@ -24,18 +24,18 @@
         <h1>Time for a new plant!</h1>
         <div class="dividing-line"></div>
         <div class="login-alert" style="display: none"></div>
-        <form class="login-table" method="POST" action="/addPlant" enctype="multipart/form-data">
+        <form class="login-table" method="POST" action="/api/addPlant" enctype="multipart/form-data">
             <div class="login-box">
                 <label>Plant Name</label>
-                <input type="text" class="login-inputs" name="name" pattern="^[a-zA-Z0-9]+$" required maxlength="30">
+                <input type="text" class="login-inputs" name="name" pattern="^[a-zA-Z0-9\s]+$" required maxlength="30">
             </div>
             <div class="login-box">
                 <label>Plant Species</label>
-                <input type="text" class="login-inputs" name="species" pattern="^[a-zA-Z0-9]+$" required maxlength="50">
+                <input type="text" class="login-inputs" name="species" pattern="^[a-zA-Z0-9\s-]+$" required maxlength="50">
             </div>
             <div class="login-box">
                 <label>Description</label>
-                <input type="text" class="login-inputs" name="description" pattern="^[a-zA-Z0-9]+$" required maxlength="255">
+                <input type="text" class="login-inputs" name="description" pattern="^[a-zA-Z0-9\s-:,./?!]+$" required maxlength="255">
             </div>
             <div class="login-box">
                 <label>Last Watered</label>
@@ -43,7 +43,7 @@
             </div>
             <div class="login-box">
                 <label>Picture</label>
-                <input type="file" class="login-inputs" id="password" name="picture" required>
+                <input type="file" class="login-inputs" id="password" name="picture" accept="image/jpeg, image/png, image/jpg" required>
             </div>
             <div class="login-box">
                 <button id="submit">Submit</button>
