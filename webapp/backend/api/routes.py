@@ -115,4 +115,16 @@ def post_addPlant():
         "fname": filename
     }
     db['plants'].insert_one(insert)
-    return redirect('/static/html/myPlants.html')
+    return redirect('/templates/myPlants')
+
+@api.route('/addWatering')
+def add_watering():
+    '''
+    -> {status: success}
+
+    A simple endpoint to add a new watering for a certain plant in the database
+
+    Use fname to identify the plant since it should always be unique.
+    Update the plant's data in the databse
+    '''
+    return jsonify({'status':'success'})
