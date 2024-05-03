@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="decription" content="A simple website made to track my plants">
+    <title>Add a Plant</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../views/plant-favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <!-- JS -->
+    <script defer src="../js/populate-nav.js"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+    </nav>
+    <div class="centered">
+        <h1>Time for some edits!</h1>
+        <div class="dividing-line"></div>
+        <div class="login-alert" style="display: none"></div>
+        <form class="login-table" method="POST" action="/api/editPlant" enctype="multipart/form-data">
+            <div class="login-box">
+                <label>Plant Name</label>
+                <input type="text" class="login-inputs" name="name" pattern="^[a-zA-Z0-9\s]+$" required maxlength="30" id="name">
+            </div>
+            <div class="login-box">
+                <label>Plant Species</label>
+                <input type="text" class="login-inputs" name="species" pattern="^[a-zA-Z0-9\s-]+$" required maxlength="50" id="species">
+            </div>
+            <div class="login-box">
+                <label>Description</label>
+                <input type="text" class="login-inputs" name="description" pattern="^[a-zA-Z0-9\s-:,./?!]+$" required maxlength="255" id="description">
+            </div>
+            <div class="login-box">
+                <label>Last Watered</label>
+                <input type="date" class="login-inputs" name="lastWatered" required id="lastWatered">
+            </div>
+            <div class="login-box">
+                <label>Picture</label>
+                <input type="file" class="login-inputs" name="picture" accept="image/jpeg, image/png, image/jpg" required id="picture">
+            </div>
+            <div class="login-box">
+                <button id="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+document.querySelector('#name').value = {{plant['name']}}
+document.querySelector('#species').value = {{plant['species']}}
+document.querySelector('#description').value = {{plant['description']}}
+document.querySelector('#lastWatered').value = {{plant['lastWatered']}}
+
+</script>
+</html>
