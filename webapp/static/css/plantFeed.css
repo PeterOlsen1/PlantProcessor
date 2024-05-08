@@ -1,0 +1,35 @@
+.card {
+    display: flex;
+    flex-direction: row;
+}
+
+.card-left {
+    width: 30%;
+    height: 5%;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.card-right {
+    width: 30%;
+    height: 5%;
+    border: 1px solid white;
+}
+
+#plants {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    margin-top: 6vmin;
+}
+
+.card-left img {
+    max-width: 70%;
+    max-height: 70%;
+    display: block;
+}
