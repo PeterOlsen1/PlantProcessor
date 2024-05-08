@@ -122,16 +122,42 @@ def post_addPlant():
 @api.route('/addWatering')
 def add_watering():
     '''
-    -> {status: success}
+    -> {status: success} | {status: failure}
 
     A simple endpoint to add a new watering for a certain plant in the database
 
-    Use fname to identify the plant since it should always be unique.
-    Update the plant's data in the databse
+    If the user is logged in and owns the plant, update its information in the database.
+    if the user is not logged in, return a failure
     '''
+    plant = db['plants'].find_one({'_id': ObjectId(request.args.get('id'))})
+    if (session['username'] == plant['owner']):
+        db['plants'].update_one(
+            {'_id': ObjectId(request.args.get('id'))},  # Filter condition
+            {'$set': {'lastWatered': str(date.today())}}     # Update operation
+        )
+        return jsonify({'status':'success'})
+    else:
+        return jsonify({'status':'failure'})
 
-    db['plants'].update_one(
-        {'_id': ObjectId(request.args.get('id'))},  # Filter condition
-        {'$set': {'lastWatered': str(date.today())}}     # Update operation
-    )
-    return jsonify({'status':'success'})
+@api.route('/fetchByUser')
+def fetchByUser():
+    '''
+    -> Python dictionary containing keys of users, and values of lists of their plants
+        {"peter":[...], "isabel":[...], ...}
+    
+    An api endpoint to gather every plant by user
+
+    This function is designed to gather every plant from the database,
+    and marshall the data into a new dictionary categorized by owner name.
+    
+    Should work in O(n) time where n is the number of entries in the plant database
+    '''
+    data = list(db['plants'].find())
+    out = {}
+    for plant in data:
+        plant['_id'] = str(plant['_id'])
+        if plant['owner'] in out:
+            out[plant['owner']].append(plant)
+        else:
+            out[plant['owner']] = [plant]
+    return out
