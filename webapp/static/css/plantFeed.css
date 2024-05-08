@@ -13,9 +13,10 @@
 }
 
 .card-right {
-    width: 30%;
-    height: 5%;
+    width: 100%;
     border: 1px solid white;
+    line-height: 150%;
+    padding-left: 10px;
 }
 
 #plants {
@@ -25,11 +26,15 @@
 }
 
 h1 {
-    margin-top: 6vmin;
+    margin-top: 8vmin;
 }
 
 .card-left img {
     max-width: 70%;
     max-height: 70%;
     display: block;
+}
+
+strong {
+    text-decoration: underline;
 }
