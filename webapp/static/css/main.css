@@ -13,8 +13,8 @@ nav {
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     background-color: rgba(255, 255, 255, 0.288);
-    font-size: 3vmin;
-    height: 4.5vmin;
+    font-size: 4vmin;
+    height: 6vmin;
     position: fixed;
     width: 100%;
     z-index: 2;
