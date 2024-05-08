@@ -56,9 +56,12 @@ def templates_editPlant():
     if session:
         id = request.args.get('id')
         plant = db['plants'].find_one({"_id": ObjectId(id)})
-        return render_template('editPlant.jinja', 
-                               session=session, 
-                               plant=plant)
+        if session['username'] == plant['username']:
+            return render_template('editPlant.jinja', 
+                                session=session, 
+                                plant=plant)
+        else:
+            return 
     else:
         return redirect('/login')
     
