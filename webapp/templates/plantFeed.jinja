@@ -19,7 +19,8 @@
 <body>
     <nav></nav>
     <div class="centered">
-        <h1>Check out some of the plants other have been taking care of!</h1>
+        <h1>Welcome to the plant feed!</h1>
+        <p>Come check out what others are up to!</p>
         <div id="plants">
             {%for plant in plants%}
                 <div class="card">
@@ -30,7 +31,7 @@
                         <strong>Owner:</strong> {{plant['owner']}}<br>
                         <strong>Name:</strong> {{plant['name']}}<br>
                         <strong>Species:</strong> {{plant['species']}}<br>
-                        <strong>Description:</strong> {{plant['species']}}<br>
+                        <strong>Description:</strong> {{plant['description']}}<br>
                     </div>
                 </div>
             {%endfor%}
