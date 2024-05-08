@@ -36,8 +36,9 @@
             {%elif dateDifference(plant['lastWatered']) >= 14%}
                 <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red">{{dateDifference(plant['lastWatered'])}}</span> days. You should probably get on that.</p>
             {%endif%}
-            <button href="/api/newWatering?fname={{plant['fname']}}">Click to register a watering today</button>
-            <p>Click <a style="text-decoration: underline" href="/templates/editPlant?id={{plant['_id']}}">here</a> to edit {{plant['name']}}'s information</p> <br><br>
+            <button onclick="water()">Click here to register a watering for today</button>
+            <a href="/templates/editPlant?id={{plant['_id']}}"><button>Click here to edit {{plant['name']}}'s information</button></a>
+            {# <p>Click <a style="text-decoration: underline" href="/templates/editPlant?id={{plant['_id']}}">here</a> to edit {{plant['name']}}'s information</p> <br><br> #}
         </div>
         <div class="dividing-line"></div>
         <div class="centered">
@@ -54,4 +55,10 @@
         </div>
     </div>
 </body>
+<script>
+async function water() {
+    await fetch("/api/addWatering?id={{plant['_id']}}");
+    window.location.reload();
+}
+</script>
 </html>
