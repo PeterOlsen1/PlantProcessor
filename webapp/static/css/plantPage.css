@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding-top: 70px;
+    padding-top: 6vmin;
 }
 
 #plant-body h1 {
@@ -13,8 +13,10 @@
 
 #plant-body p {
     font-size: 30px;
-    margin-top: 30px;
+    margin-top: 2vmin;
     line-height: 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 #p-header {
@@ -23,7 +25,7 @@
 
 #plant-picture {
     border: 1px solid white;
-    margin-top: 30px;
+    margin-top: 2vmin;
     margin-bottom: 30px;
     height: 400px;
     width: 300px;
@@ -31,17 +33,17 @@
 
 #caption {
     font-size: 40px;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     display:flex;
     justify-content:center;
-    padding-top: 100px;
+    padding-left: 4%;
     width: 400px;
 }
 
 #picture-and-caption {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     padding: 30px;
     width: 100vmin;
     height: 430px;
