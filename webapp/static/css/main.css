@@ -20,6 +20,10 @@ nav {
     z-index: 2;
 }
 
+.nav-image {
+    height: 90%;
+}
+
 #navigation-links {
     display: flex;
     justify-content: space-evenly;
