@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="../views/plant-favicon.png">
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/plantFeed.css">
+    <!-- JS -->
+    <script defer src="../js/populate-nav.js"></script>
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Junge&family=Rosarivo:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav></nav>
+    <div class="centered">
+        <h1>Check out some of the plants other have been taking care of!</h1>
+        <div id="plants">
+            {%for plant in plants%}
+                <div class="card">
+                    <div class="card-left">
+                        <img src="/uploads/{{plant['fname']}}">
+                    </div>
+                    <div class="card-right">
+                        <strong>Owner:</strong> {{plant['owner']}}<br>
+                        <strong>Name:</strong> {{plant['name']}}<br>
+                        <strong>Species:</strong> {{plant['species']}}<br>
+                        <strong>Description:</strong> {{plant['species']}}<br>
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+    </div>
+</body>
+</html>
+
