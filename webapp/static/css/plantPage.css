@@ -42,9 +42,24 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    word-wrap: break-word;
     padding: 30px;
     width: 100vmin;
-    height: 35vh;
+    height: 430px;
 }
 
+button {
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.25);
+    color: white;
+    font-family: "Junge", cursive;
+    font-size: 15pt;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.40);
+}
