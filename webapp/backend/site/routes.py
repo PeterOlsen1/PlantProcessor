@@ -31,9 +31,9 @@ def serve_addPlant():
 def serve_newUser():
     return send_file(WEBAPP + "/static/html/newUser.html")
 
-@site.route('/requireLogin')
-def serve_requireLogin():
-    return send_file(WEBAPP + "/static/html/requireLogin.html")
+@site.route('/invalidUser')
+def serve_invalidUser():
+    return send_file(WEBAPP + "/static/html/invalidUser.html")
 
 '''
 STATIC FILES
