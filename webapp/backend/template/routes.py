@@ -61,3 +61,8 @@ def templates_editPlant():
                                plant=plant)
     else:
         return redirect('/login')
+    
+@template.route('/plantFeed')
+def templates_plantFeed():
+    plants = list(db['plants'].find())
+    return render_template('plantFeed.jinja', plants=plants[0:1])
