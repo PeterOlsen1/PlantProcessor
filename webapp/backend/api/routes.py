@@ -3,6 +3,8 @@ import os
 import bcrypt
 from backend.db_connect import db
 from werkzeug.utils import secure_filename
+from bson.objectid import ObjectId
+from datetime import date
 
 api = Blueprint('api', __name__, url_prefix='/api')
 WEBAPP = os.getcwd() + "/.."
@@ -127,4 +129,9 @@ def add_watering():
     Use fname to identify the plant since it should always be unique.
     Update the plant's data in the databse
     '''
+
+    db['plants'].update_one(
+        {'_id': ObjectId(request.args.get('id'))},  # Filter condition
+        {'$set': {'lastWatered': str(date.today())}}     # Update operation
+    )
     return jsonify({'status':'success'})
