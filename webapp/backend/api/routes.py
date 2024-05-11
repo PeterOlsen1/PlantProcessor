@@ -126,38 +126,35 @@ def add_watering():
 
     A simple endpoint to add a new watering for a certain plant in the database
 
-    If the user is logged in and owns the plant, update its information in the database.
-    if the user is not logged in, return a failure
+    Use id to identify the plant since it is always unique.
+    If the plant does not belong to the current user, don't update anything
+    Update the plant's data in the databse
     '''
-    plant = db['plants'].find_one({'_id': ObjectId(request.args.get('id'))})
-    if (session['username'] == plant['owner']):
-        db['plants'].update_one(
-            {'_id': ObjectId(request.args.get('id'))},  # Filter condition
-            {'$set': {'lastWatered': str(date.today())}}     # Update operation
-        )
-        return jsonify({'status':'success'})
-    else:
-        return jsonify({'status':'failure'})
+    if session:
+        plant = db['plants'].find_one({'_id': ObjectId(request.args.get('id'))})
+        if plant['owner'] == session['username']:
+            db['plants'].update_one(
+                {'_id': ObjectId(request.args.get('id'))}, 
+                {'$set': {'lastWatered': str(date.today())}} 
+            )
+            return jsonify({'status':'success'})
+    return jsonify({'status':'failure'})
 
-@api.route('/fetchByUser')
-def fetchByUser():
+@api.route('/fetchById')
+def fetch_by_id():
     '''
-    -> Python dictionary containing keys of users, and values of lists of their plants
-        {"peter":[...], "isabel":[...], ...}
-    
-    An api endpoint to gather every plant by user
+    -> {status: failure} | {status: success; plant : (plant json object)}
 
-    This function is designed to gather every plant from the database,
-    and marshall the data into a new dictionary categorized by owner name.
-    
-    Should work in O(n) time where n is the number of entries in the plant database
+    An endpoint to grab a plant by its id
+
+    Use ID to identify the plant.
+    If the given plant doesn't belong to the current user, return a failure.
+    Else, return a success and the plant object
     '''
-    data = list(db['plants'].find())
-    out = {}
-    for plant in data:
-        plant['_id'] = str(plant['_id'])
-        if plant['owner'] in out:
-            out[plant['owner']].append(plant)
-        else:
-            out[plant['owner']] = [plant]
-    return out
+    if session:
+        plant = db['plants'].find_one({'_id': ObjectId(request.args.get('id'))})
+        if plant and plant['owner'] == session['username']:
+            #change plant _id to a string otherwise there is an encoding error
+            plant['_id'] = str(plant['_id'])
+            return jsonify({'stauts': 'success', 'plant': plant})
+    return jsonify({'status': 'failure'})
