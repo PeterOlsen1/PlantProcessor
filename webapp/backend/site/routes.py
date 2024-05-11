@@ -35,6 +35,10 @@ def serve_newUser():
 def serve_invalidUser():
     return send_file(WEBAPP + "/static/html/invalidUser.html")
 
+@site.route('/fail')
+def serve_fail():
+    return send_file(WEBAPP + "/static/html/fail.html")
+
 '''
 STATIC FILES
 '''
