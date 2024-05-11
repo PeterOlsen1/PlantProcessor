@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="decription" content="A simple website made to track my plants">
-    <title>Add a Plant</title>
+    <title>Edit a Plant</title>
     <!-- FAVICON -->
     <link rel="icon" href="../views/plant-favicon.png">
     <!-- CSS -->
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/login.css">
     <!-- JS -->
     <script defer src="../js/populate-nav.js"></script>
+    <script src="../js/form-populate.js"></script>
     <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,11 +52,4 @@
         </form>
     </div>
 </body>
-<script>
-document.querySelector('#name').value = {{plant['name']}}
-document.querySelector('#species').value = {{plant['species']}}
-document.querySelector('#description').value = {{plant['description']}}
-document.querySelector('#lastWatered').value = {{plant['lastWatered']}}
-
-</script>
 </html>
