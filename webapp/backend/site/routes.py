@@ -15,6 +15,8 @@ def serve_slash():
 
 @site.route('/login')
 def serve_login():
+    if session:
+        return redirect('/templates/myPlants')
     return send_file(WEBAPP + "/static/html/login.html")
 
 @site.route('/aboutMe')
