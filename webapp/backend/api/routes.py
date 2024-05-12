@@ -90,9 +90,9 @@ def user_overlap():
 @api.route('/addPlant', methods=["POST"])
 def post_addPlant():
     '''
-    ->
+    -> redirect to myPlants
 
-    API endpoint to add a plant to the database, still a work in progress
+    API endpoint to add a plant to the database.
 
     First, upload the given file to the uploads folder with a new name.
     Once the file has been uploaded, save the path in a variable associated with the new object.
@@ -158,3 +158,21 @@ def fetch_by_id():
             plant['_id'] = str(plant['_id'])
             return jsonify({'stauts': 'success', 'plant': plant})
     return jsonify({'status': 'failure'})
+
+@api.route('/editPlant', methods=['POST'])
+def api_editPlant():
+    '''
+    -> redirect to specific plant page
+
+    An API endpoint for editing a plants data
+
+    Use the id to identify the plant.
+    See if the request contains a picture.
+    If there is a picture, save it in the file system
+    '''
+    if session:
+        data = request.form
+        if request.files['picture']:
+            print('hi')
+        plant = db['plants'].find_one({'_id': ObjectId(data['id'])})
+        return redirect('/templates/editPlant?id=66341cdf0fc3d55bc4923166')
