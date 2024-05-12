@@ -9,7 +9,7 @@
     padding-top: 100px;
 }
 
-#about-me-image-title {
+.about-me-image-title {
     display: flex;
     justify-content: space-evenly;
     padding-bottom: 20px;
