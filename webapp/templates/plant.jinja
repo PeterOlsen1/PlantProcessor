@@ -32,11 +32,11 @@
             {%if dateDifference(plant['lastWatered']) == 1%}
                 <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px; width: 20pt">{{dateDifference(plant['lastWatered'])}}</span> day. Way to stay on top of your watering!</p>
             {%elif dateDifference(plant['lastWatered']) < 7%}
-                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px;">{{dateDifference(plant['lastWatered'])}}</span> days. Way to stay on top of your watering!</p>
-            {%elif dateDifference(plant['lastWatered']) >= 7%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px; width: 20pt">{{dateDifference(plant['lastWatered'])}}</span> days. Way to stay on top of your watering!</p>
+            {%elif dateDifference(plant['lastWatered']) < 14%}
                 <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid yellow; padding: 2px; color: yellow; width: 24pt;">{{dateDifference(plant['lastWatered'])}}</span> days. Time to grab the watering can!</p>
-            {%elif dateDifference(plant['lastWatered']) >= 14%}
-                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red">{{dateDifference(plant['lastWatered'])}}</span> days. You should probably get on that.</p>
+            {%else%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red; width: 24pt;">{{dateDifference(plant['lastWatered'])}}</span> days. You should probably get on that.</p>
             {%endif%}
                 <button onclick="water()">Click here to register a watering for today</button>
                 <a href="/templates/editPlant?id={{plant['_id']}}"><button>Click here to edit {{plant['name']}}'s information</button></a>
@@ -46,11 +46,11 @@
             {%if dateDifference(plant['lastWatered']) == 1%}
                 <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px; width: 20pt">{{dateDifference(plant['lastWatered'])}}</span> day. {{plant['owner']}} must be a watering pro!</p>
             {%elif dateDifference(plant['lastWatered']) < 7%}
-                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px;">{{dateDifference(plant['lastWatered'])}}</span> days. {{plant['owner']}} must be a watering pro!</p>
-            {%elif 7 <= dateDifference(plant['lastWatered']) < 14%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid white; padding: 2px; width: 20pt">{{dateDifference(plant['lastWatered'])}}</span> days. {{plant['owner']}} must be a watering pro!</p>
+            {%elif dateDifference(plant['lastWatered']) < 14%}
                 <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid yellow; padding: 2px; color: yellow; width: 24pt;">{{dateDifference(plant['lastWatered'])}}</span> days. Time for {{plant['owner']}} to grab the watering can!</p>
-            {%elif dateDifference(plant['lastWatered']) >= 14%}
-                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red">{{dateDifference(plant['lastWatered'])}}</span> days. {{plant['owner']}} should probably get on that.</p>
+            {%else%}
+                <p id="watering">{{plant['name']}} has not been watered in <span style="border: 1px solid red; padding: 2px; color: red; width: 24pt">{{dateDifference(plant['lastWatered'])}}</span> days. {{plant['owner']}} should probably get on that.</p>
             {%endif%}
         {% endif %}
         </div>
