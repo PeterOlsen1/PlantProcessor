@@ -27,6 +27,14 @@
             <p id="caption"></p>
         </div>
         <div class="centered">
+        {% if session['username'] != plant['owner']%}
+            <p><strong>Owner:</strong> {{plant['owner']}}</p>
+        {% endif %}
+        <div style="text-align: center">
+            <p><strong>Name:</strong> {{plant['name']}}</p>
+            <p><strong>Species:</strong> {{plant['species']}}</p>
+            <p><strong>Description:</strong> {{plant['description']}}</p>
+        </div>
         {% if session['username'] == plant['owner']%}
         {# If the owner of the plant is the one looking, show watering info and buttons to edit / add a new watering #}
             {%if dateDifference(plant['lastWatered']) == 1%}
