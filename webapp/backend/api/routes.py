@@ -162,17 +162,62 @@ def fetch_by_id():
 @api.route('/editPlant', methods=['POST'])
 def api_editPlant():
     '''
-    -> redirect to specific plant page
+    -> redirect to specific plant page (plant owner) | redirect to invalid user (not owner) | redirect to login (not logged in)
 
     An API endpoint for editing a plants data
 
     Use the id to identify the plant.
     See if the request contains a picture.
-    If there is a picture, save it in the file system
+    If there is a picture, save it in the file system and delete the old file.
+    If picture, replace all new plant data and fname.
+    If no picture, replace all data but not fname
     '''
     if session:
         data = request.form
-        if request.files['picture']:
-            print('hi')
         plant = db['plants'].find_one({'_id': ObjectId(data['id'])})
-        return redirect('/templates/editPlant?id=66341cdf0fc3d55bc4923166')
+        if session['username'] == plant['owner']:
+            if request.files['picture']:
+                    #grab the picture from the request files
+                    picture = request.files['picture']
+                    filename = session['username'] +"_"+ secure_filename(picture.filename)
+                    picture.filename = filename
+
+                    #remove the old file to make sure we don't keep things we don't need
+                    os.remove(os.path.join(os.getcwd() + "/uploads/", plant['fname']))
+                    #save the file!
+                    picture.save(os.path.join(os.getcwd() + "/uploads/", filename))
+                    
+                    db['plants'].update_one(
+                        {'_id': ObjectId(request.args.get('id'))}, 
+                        {'$set': {
+                            "owner":session['username'],
+                            "name": data['name'],
+                            "species": data['species'],
+                            "description": data['description'],
+                            "lastWatered": data['lastWatered'],
+                            "fname": filename
+                            }
+                        }
+                    )
+
+            else:
+                #make the call to update but don't update the filename
+                db['plants'].update_one(
+                    {'_id': ObjectId(request.args.get('id'))}, 
+                    {'$set': {
+                        "owner":session['username'],
+                        "name": data['name'],
+                        "species": data['species'],
+                        "description": data['description'],
+                        "lastWatered": data['lastWatered'],
+                        }
+                    }
+                )
+            # corresponds to the block where the user is logged in and on a plant that belongs to them
+            return redirect('/templates/plant?id=66341cdf0fc3d55bc4923166')
+        else:
+            #corresponds to not on their own plant
+            return redirect('/invalidUser')
+    else:
+        #not logged in
+        return redirect('/login')
