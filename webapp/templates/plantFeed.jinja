@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
+    <title>The Plant Feed</title>
     <!-- FAVICON -->
     <link rel="icon" href="../views/plant-favicon.png">
     <!-- CSS -->
@@ -18,21 +18,14 @@
 </head>
 <body>
     <nav></nav>
-    <div class="centered">
+    <div class="centered" style="margin-left: 5%; margin-right: 5%">
         <h1>Welcome to the plant feed!</h1>
         <p>Come check out what others are up to!</p>
+        <p>Click on any plant to bring up its individual plant page</p>
         <div id="plants">
             {%for plant in plants%}
-                <div class="card">
-                    <div class="card-left">
-                        <img src="/uploads/{{plant['fname']}}">
-                    </div>
-                    <div class="card-right">
-                        <strong>Owner:</strong> {{plant['owner']}}<br>
-                        <strong>Name:</strong> {{plant['name']}}<br>
-                        <strong>Species:</strong> {{plant['species']}}<br>
-                        <strong>Description:</strong> {{plant['description']}}<br>
-                    </div>
+                <div class="card" onclick="window.location.href = '/templates/plant?id={{plant['_id']}}'">
+                    <img src="/uploads/{{plant['fname']}}">
                 </div>
             {%endfor%}
         </div>
