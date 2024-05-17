@@ -9,13 +9,12 @@ body {
 }
 
 nav {
-    display: flex;
+    display: inline-flex;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     background-color: rgba(255, 255, 255, 0.288);
     font-size: 3vmin;
     height: 6vmin;
-    min-height: auto;
     max-height: 10vmin;
     position: fixed;
     width: 100%;
@@ -59,6 +58,7 @@ a {
     text-decoration: none;
     position: relative;
     padding-top: 5px;
+    text-wrap: nowrap;
 }
 
 a:hover {
