@@ -68,4 +68,4 @@ def templates_editPlant():
 @template.route('/plantFeed')
 def templates_plantFeed():
     plants = list(db['plants'].find())
-    return render_template('plantFeed.jinja', plants=plants[0:1])
+    return render_template('plantFeed.jinja', plants=plants)
