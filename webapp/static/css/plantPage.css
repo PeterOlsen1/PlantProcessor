@@ -19,10 +19,6 @@
     flex-direction: column;
 }
 
-#p-header {
-    padding-bottom: 30px;
-}
-
 #plant-picture {
     border: 1px solid white;
     margin-top: 2vmin;
