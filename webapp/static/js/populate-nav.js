@@ -9,7 +9,7 @@ nav.innerHTML = `
         <a><img src="/views/logout.webp" title="Logout" style='top: 10%' onclick='logout()' class='nav-image'></a>
     </div>
     <div id="navigation-links">
-        <a href="/aboutMe">About Me</a> <a href='/templates/plantFeed'>View Other Plants</a> <a href="/templates/myPlants">My Plants</a> <a href="/addPlant">Add a Plant</a>
+        <a href="/aboutMe">About Me</a> <a href='/templates/plantFeed'>The Plant Feed</a> <a href="/templates/myPlants">My Plants</a> <a href="/addPlant">Add a Plant</a>
     </div>
 `;
 
