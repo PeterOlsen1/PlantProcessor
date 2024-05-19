@@ -176,6 +176,7 @@ def api_editPlant():
         data = request.form
         plant = db['plants'].find_one({'_id': ObjectId(data['id'])})
         if session['username'] == plant['owner']:
+            print(data)
             if request.files['picture']:
                     #grab the picture from the request files
                     picture = request.files['picture']
@@ -214,7 +215,7 @@ def api_editPlant():
                     }
                 )
             # corresponds to the block where the user is logged in and on a plant that belongs to them
-            return redirect('/templates/plant?id=66341cdf0fc3d55bc4923166')
+            return redirect('/templates/plant?id=' + str(plant['_id']))
         else:
             #corresponds to not on their own plant
             return redirect('/invalidUser')
