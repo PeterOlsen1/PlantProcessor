@@ -39,7 +39,7 @@
 #picture-and-caption {
     display: flex;
     justify-content: space-evenly;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     padding: 30px;
     width: 100vmin;
     height: 430px;
@@ -62,6 +62,29 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.40);
 }
 
-#watering {
-    text-wrap: nowrap;
+/* #watering {
+    display: inline-block;
+} */
+
+
+.white {
+    color: white;
+    border: 1px solid white;
+    padding-left: 4px;
+    max-width: 16pt;
+}
+
+.yellow {
+    color: yellow;
+    border: 1px solid yellow;
+    padding-left: 4px;
+    max-width: 18pt;
+}
+
+.red {
+    color: red;
+    border: 1px solid red;
+    max-width: 26pt;
+    margin-left: auto;
+    margin-right: auto;
 }
