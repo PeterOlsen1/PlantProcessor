@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify, session, request, current_app, redirect
-import os
-import bcrypt
+from os import getcwd, path, remove
+from bcrypt import checkpw, gensalt, hashpw
 from backend.db_connect import db
 from werkzeug.utils import secure_filename
 from bson.objectid import ObjectId
 from datetime import date
 
 api = Blueprint('api', __name__, url_prefix='/api')
-WEBAPP = os.getcwd() + "/.."
+WEBAPP = getcwd() + "/.."
 
 
 @api.route('/login', methods=['POST'])
@@ -28,7 +28,7 @@ def validate_login():
     names = db['users'].find({"username":username})
     for name in names:
         print(name)
-        if (bcrypt.checkpw(password.encode('utf-8'), name['password'].encode('utf-8'))):
+        if (checkpw(password.encode('utf-8'), name['password'].encode('utf-8'))):
             session['username'] = name['username']
             session['name'] = name['name']
             return jsonify({'status':'success'})
@@ -54,14 +54,14 @@ def add_user():
 
     This function will add a new user to the databse
 
-    Hashes the uploaded username and then inserts into the users database the username and hashed password
-    Will return status success when done
+    Hashes the uploaded username and then inserts into the users database the username and hashed password.
+    Will return status success when done.
     '''
     body =  request.json
     password = body['password']
     username = body['username']
     name = body['name']
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    hashed_password = hashpw(password.encode('utf-8'), gensalt())
     db['users'].insert_one({"username":username, "password":hashed_password.decode('utf-8'), "name":name})
     session['username'] = username
     session['name'] = name
@@ -105,7 +105,7 @@ def post_addPlant():
     filename = session['username'] +"_"+ secure_filename(picture.filename)
     picture.filename = filename
     #save the file!
-    picture.save(os.path.join(os.getcwd() + "/uploads/", filename))
+    picture.save(path.join(getcwd() + "/uploads/", filename))
 
     #insert the new plant into the database
     insert = {
@@ -183,9 +183,9 @@ def api_editPlant():
                     picture.filename = filename
 
                     #remove the old file to make sure we don't keep things we don't need
-                    os.remove(os.path.join(os.getcwd() + "/uploads/", plant['fname']))
+                    remove(path.join(getcwd() + "/uploads/", plant['fname']))
                     #save the file!
-                    picture.save(os.path.join(os.getcwd() + "/uploads/", filename))
+                    picture.save(path.join(getcwd() + "/uploads/", filename))
                     
                     db['plants'].update_one(
                         {'_id': ObjectId(request.args.get('id'))}, 
