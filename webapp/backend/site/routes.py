@@ -1,7 +1,7 @@
 from flask import Blueprint, send_file, send_from_directory, session, redirect
-import os
+from os import getcwd
 
-WEBAPP = os.getcwd() + "/.."
+WEBAPP = getcwd() + "/.."
 site = Blueprint('site', __name__)
 
 
