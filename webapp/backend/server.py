@@ -1,10 +1,8 @@
 from flask import Flask, send_file, request, session, jsonify, render_template
-import os
-# import psycopg2
-import bcrypt
-import sys
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+from os import path, getcwd
+from sys import path as syspath
+SCRIPT_DIR = path.dirname(path.abspath(__file__))
+syspath.append(path.dirname(SCRIPT_DIR))
 from backend.site.routes import site
 from backend.api.routes import api
 from backend.template.routes import template
@@ -14,7 +12,7 @@ from db_connect import db
 GLOBALS -------------------------------------------------------------------------------------------------------------------------------------
 
 '''
-FRONTEND = os.getcwd() + "/.."
+FRONTEND = getcwd() + "/.."
 UPLOAD_FOLDER = '/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
